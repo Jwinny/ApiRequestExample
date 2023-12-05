@@ -15,4 +15,10 @@ struct Server {
         components.host = "servicodados.ibge.gov.br"
         return components
     }()
+    static let github: URLComponents = {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "api.github.com"
+        return components
+    }()
 }
