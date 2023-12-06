@@ -12,6 +12,7 @@ class GithubUserViewModel: ObservableObject {
     private let network: NetworkService = NetworkService.shared
     static var instance = GithubUserViewModel()
     func getUser() async {
+        resultUser = nil
         let request: GithubUser.Request = GithubUser.Request()
         network.request(request, completion: { response in
             switch response {

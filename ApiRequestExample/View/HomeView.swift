@@ -15,7 +15,6 @@ struct HomeView: View {
         githubViewModel.resultUser
     }
     @ObservedObject var githubViewModel: GithubUserViewModel = GithubUserViewModel.instance
-    @State var submit: Bool = false
     var body: some View {
         VStack(spacing: 20) {
             HStack {
@@ -28,7 +27,7 @@ struct HomeView: View {
                                 await githubViewModel.getUser()
                             }
                         }
-                        submit.toggle()
+                        searchUser = ""
                     }
                 Button("Pesquisar") {
                     KeysService.set(self.searchUser, for: .username)
@@ -37,7 +36,7 @@ struct HomeView: View {
                             await githubViewModel.getUser()
                         }
                     }
-                    submit.toggle()
+                    searchUser = ""
                 }
                 .buttonStyle(.borderedProminent)
             }
@@ -56,15 +55,12 @@ struct HomeView: View {
                 }
         }
         .frame(width: 120)
-            Text(userName ?? "Username")
+            Text(user?.login ?? "Username")
                 .bold()
                 .font(.title3)
-            Text(user?.bio ?? "Bio")
+            Text(user?.bio ?? "Empty Bio")
             Spacer()
         }
-        .onChange(of: user?.login, {
-            userName = user?.login
-        })
         .padding()
     }
 }
