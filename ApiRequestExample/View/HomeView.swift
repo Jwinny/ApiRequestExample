@@ -10,7 +10,10 @@ import SwiftUI
 struct HomeView: View {
     @State var description: String = ""
     @State var searchUser: String = ""
-    @State private var user: GithubUser.Response?
+    @State var userName: String?
+    private var user: GithubUser.Response? {
+        githubViewModel.resultUser
+    }
     @ObservedObject var githubViewModel: GithubUserViewModel = GithubUserViewModel.instance
     @State var submit: Bool = false
     var body: some View {
@@ -53,12 +56,15 @@ struct HomeView: View {
                 }
         }
         .frame(width: 120)
-            Text(user?.login ?? "Username")
+            Text(userName ?? "Username")
                 .bold()
                 .font(.title3)
             Text(user?.bio ?? "Bio")
             Spacer()
         }
+        .onChange(of: user?.login, {
+            userName = user?.login
+        })
         .padding()
     }
 }

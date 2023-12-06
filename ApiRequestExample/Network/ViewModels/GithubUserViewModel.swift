@@ -16,9 +16,9 @@ class GithubUserViewModel: ObservableObject {
         network.request(request, completion: { response in
             switch response {
             case .success(let data):
-                self.resultUser = data.self
-            case .failure(_):
-                return
+                self.resultUser = data
+            case .failure(let error):
+                print(error)
             }
         })
     }

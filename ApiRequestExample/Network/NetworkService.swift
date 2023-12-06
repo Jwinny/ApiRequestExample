@@ -24,7 +24,7 @@ class NetworkService: NetworkServiceInterface {
 
             urlRequest.allHTTPHeaderFields = request.headers
 
-            session.dataTask(with: urlRequest) { data, response, error in
+            session.dataTask(with: urlRequest) { (data, response, error) in
                 DispatchQueue.main.async {
                     if error != nil {
                         return completion(.failure(NetworkServiceError.unknownError))
