@@ -19,4 +19,11 @@ extension GithubUser.Request: RequestTemplate {
 
     var path: String {"/users/\(KeysService.get(.username) as? String ?? "")"}
 
+    var headers: [String : String] {
+        [
+            "Content-Type": "application/json",
+            "X-GitHub-Api-Version": "2022-11-28",
+            "Accept": "application/vnd.github+json"
+        ]
+    }
 }

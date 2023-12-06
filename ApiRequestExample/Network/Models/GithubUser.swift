@@ -11,8 +11,8 @@ struct GithubUser {
     struct Request {
     }
     struct Response: Decodable {
-        let login: String
-        let avatarUrl: String
-        let bio: String
+        let login: String?
+        let avatarUrl: String?
+        let bio: String?
     }
 }
